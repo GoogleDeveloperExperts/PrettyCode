@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PrettyCode</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="fonts.css">
+  <link rel="import" href="bower_components/polymer/polymer.html">
+  <link rel="import" href="bower_components/prettify-element/prettify-element.html">
+  <link rel="import" href="bower_components/core-icons/core-icons.html">
+  <link rel="import" href="bower_components/core-menu/core-menu.html">
+  <link rel="import" href="bower_components/paper-item/paper-item.html">
+  <link rel="import" href="bower_components/paper-button/paper-button.html">
+  <link rel="import" href="bower_components/paper-dropdown/paper-dropdown.html">
+  <link rel="import" href="bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+</head>
+
+<body unresolved>
+  <template id='mainContent' is="auto-binding">
+    <div layout horizontal flex>
+      <paper-button class="theme-button" data-theme="light">Light</paper-button>
+      <paper-button class="theme-button" data-theme="dark">Dark</paper-button>
+      <paper-dropdown-menu label="Select Language" on-core-select="{{languageSelected}}">
+        <paper-dropdown id="lang" class="dropdown">
+            <core-menu class="menu">
+                <paper-item data-value="--">(auto detect language)</paper-item>
+                <paper-item data-value="c++">c++</paper-item>
+                <paper-item data-value="java">java</paper-item>
+                <paper-item data-value="javascript">javascript</paper-item>
+                <paper-item data-value="xml">xml</paper-item>
+                <paper-item data-value="html">html</paper-item>
+                <paper-item data-value="css">css</paper-item>
+            </core-menu>
+        </paper-dropdown>
+      </paper-dropdown-menu>
+    </div>
+    <textarea>
+
+
+    </textarea>
+
+    <div id="destination"></div>
+    <prettify-element id="destination" text="{{rawCode}}"></prettify-element>
+  </template>
+
+  <script src="main.js"></script>
+</body>
+</html>

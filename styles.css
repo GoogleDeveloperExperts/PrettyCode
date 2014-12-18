@@ -1,0 +1,71 @@
+/* CSS file placeholder. */
+body {
+  background-color: #e8e8e8;
+  -webkit-font-smoothing: antialiased;
+}
+
+body.theme-dark {
+  background-color: #222;
+}
+
+#warning {
+  background-color: #f00;
+  color: #fff;
+  padding: 20px;
+  font-family: Inconsolata;
+  font-weight: bold;
+  border-radius: 6px;
+}
+
+textarea {
+  box-sizing: border-box;
+  width: 100%;
+  height: 300px;
+  padding: 20px;
+  font-family: Inconsolata;
+  font-size: 14px;
+  border: 1px solid rgba(128, 128, 128, 0.7);
+  border-radius: 6px;
+}
+
+.theme-dark textarea {
+  background-color: #000;
+  color: #fff;
+}
+
+.theme-dark pre { font-family: Inconsolata; font-size: 15px; }
+.theme-dark .pln { color: #fff }  /* plain text */
+.theme-dark .str,
+.theme-dark .atv { color: #57bb8a }  /* string content and attribute value */
+.theme-dark .kwd,
+.theme-dark .tag { color: #7baaf7;  }  /* a keyword or tag */
+.theme-dark .com { color: #aaa }  /* a comment */
+.theme-dark .typ,
+.theme-dark .var { color: #ff8a65 }  /* a type name or xq variable */
+.theme-dark .lit { color: #f4b400 }  /* a literal value */
+.theme-dark .pun,
+.theme-dark .opn,
+.theme-dark .clo { color: #a3a3a3 } /* punctuation, lisp open bracket, lisp close bracket */
+.theme-dark .atn { color: #f06292 }  /* a markup attribute name */
+.theme-dark .dec,
+.theme-dark .var { color: #e67c73 }  /* a declaration like doctype */
+.theme-dark .fun { color: #fff }  /* a function name */
+
+
+.theme-light pre { font-family: Inconsolata; font-size: 15px; }
+.theme-light .pln { color: #000 }  /* plain text */
+.theme-light .str,
+.theme-light .atv { color: #0f9d58 }  /* string content and attribute value */
+.theme-light .kwd,
+.theme-light .tag { color: #4285f4;  }  /* a keyword or tag */
+.theme-light .com { color: #999 }  /* a comment */
+.theme-light .typ,
+.theme-light .var { color: #673ab7 }  /* a type name or xq variable */
+.theme-light .lit { color: #db4437 }  /* a literal value */
+.theme-light .pun,
+.theme-light .opn,
+.theme-light .clo { color: #a3a3a3 } /* punctuation, lisp open bracket, lisp close bracket */
+.theme-light .atn { color: #e91e63 }  /* a markup attribute name */
+.theme-light .dec,
+.theme-light .var { color: #e67c73 }  /* a declaration like doctype */
+.theme-light .fun { color: #fff }  /* a function name */

@@ -9,6 +9,7 @@
   <link rel="import" href="bower_components/core-icons/core-icons.html">
   <link rel="import" href="bower_components/core-menu/core-menu.html">
   <link rel="import" href="bower_components/paper-item/paper-item.html">
+  <link rel="import" href="bower_components/paper-input/paper-input.html">
   <link rel="import" href="bower_components/paper-button/paper-button.html">
   <link rel="import" href="bower_components/paper-dropdown/paper-dropdown.html">
   <link rel="import" href="bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
@@ -33,10 +34,9 @@
         </paper-dropdown>
       </paper-dropdown-menu>
     </div>
-    <textarea>
-
-
-    </textarea>
+    <paper-autogrow-textarea id="resultPaper">
+        <textarea id="txtAreaResult"></textarea>
+    <paper-autogrow-textarea>
 
     <div id="destination"></div>
     <prettify-element id="destination" text="{{rawCode}}"></prettify-element>

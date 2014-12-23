@@ -9,7 +9,10 @@
   <link rel="import" href="bower_components/core-icons/core-icons.html">
   <link rel="import" href="bower_components/core-menu/core-menu.html">
   <link rel="import" href="bower_components/paper-item/paper-item.html">
+  <link rel="import" href="bower_components/paper-input/paper-input.html">
+  <link rel="import" href="bower_components/paper-input/paper-autogrow-textarea.html">
   <link rel="import" href="bower_components/paper-button/paper-button.html">
+  <link rel="import" href="bower_components/paper-toggle-button/paper-toggle-button.html">
   <link rel="import" href="bower_components/paper-dropdown/paper-dropdown.html">
   <link rel="import" href="bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
 </head>
@@ -17,11 +20,22 @@
 <body unresolved>
   <template id='mainContent' is="auto-binding">
     <div layout horizontal flex>
-      <paper-button class="theme-button" data-theme="light">Light</paper-button>
-      <paper-button class="theme-button" data-theme="dark">Dark</paper-button>
-      <paper-dropdown-menu label="Select Language" on-core-select="{{languageSelected}}">
+      <paper-button raised class="theme-button" data-theme="light" on-tap="{{selTheme}}">
+        Light
+      </paper-button>
+      <paper-button raised class="theme-button" data-theme="dark" on-tap="{{selTheme}}">
+        Dark
+      </paper-button>
+    </div>
+    <div horizontal layout style="margin-top:5px">
+      <div style="margin:5px">Light</div>
+      <paper-toggle-button id="ptbTheme" style="margin:5px" on-change="{{chTheme}}"></paper-toggle-button>
+      <div style="margin:5px">Dark</div>
+    </div>
+    <div layout horizontal flex>
+      <paper-dropdown-menu id="pdmLanguage" label="Select Language" on-core-select="{{languageSelected}}">
         <paper-dropdown id="lang" class="dropdown">
-            <core-menu class="menu">
+            <core-menu class="menu" >
                 <paper-item data-value="--">(auto detect language)</paper-item>
                 <paper-item data-value="c++">c++</paper-item>
                 <paper-item data-value="java">java</paper-item>
@@ -32,14 +46,17 @@
             </core-menu>
         </paper-dropdown>
       </paper-dropdown-menu>
+      <paper-input id="ptDimension" label="Font size (pt)" value="{{fontPt}}"
+          floatingLabel="true" on-change="{{ptChange}}"
+          style="margin-left:10px;" ></paper-input>
     </div>
-    <textarea>
+    <paper-autogrow-textarea id="agTa">
+      <textarea id="taCode"></textarea>
+    </paper-autogrow-textarea>
+    <div id="slidesWarnings">
 
-
-    </textarea>
-
-    <div id="destination"></div>
-    <prettify-element id="destination" text="{{rawCode}}"></prettify-element>
+    </div>
+    <prettify-element id="destination" text="{{code}}"></prettify-element>
   </template>
 
   <script src="main.js"></script>

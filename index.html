@@ -19,21 +19,15 @@
 
 <body unresolved>
   <template id='mainContent' is="auto-binding">
-    <div layout horizontal flex>
-      <paper-button raised class="theme-button" data-theme="light" on-tap="{{selTheme}}">
-        Light
-      </paper-button>
-      <paper-button raised class="theme-button" data-theme="dark" on-tap="{{selTheme}}">
-        Dark
-      </paper-button>
-    </div>
     <div horizontal layout style="margin-top:5px">
       <div style="margin:5px">Light</div>
       <paper-toggle-button id="ptbTheme" style="margin:5px" on-change="{{chTheme}}"></paper-toggle-button>
       <div style="margin:5px">Dark</div>
     </div>
     <div layout horizontal flex>
-      <paper-dropdown-menu id="pdmLanguage" label="Select Language" on-core-select="{{languageSelected}}">
+      <!--Language selection hidden as now the lang class id difficult to set on the prettify-element-->
+      <paper-dropdown-menu id="pdmLanguage" label="Select Language" style="display:none"
+          on-core-select="{{languageSelected}}">
         <paper-dropdown id="lang" class="dropdown">
             <core-menu class="menu" >
                 <paper-item data-value="--">(auto detect language)</paper-item>
@@ -54,9 +48,8 @@
       <textarea id="taCode"></textarea>
     </paper-autogrow-textarea>
     <div id="slidesWarnings">
-
     </div>
-    <prettify-element id="destination" text="{{code}}"></prettify-element>
+    <prettify-element id="destination" text="{{code}}" on-tap="{{selPrettyCode}}"></prettify-element>
   </template>
 
   <script src="main.js"></script>

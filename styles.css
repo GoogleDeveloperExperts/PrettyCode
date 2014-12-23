@@ -1,24 +1,17 @@
-  #warning {
-    background-color: #f00;
-    color: #fff;
-    padding: 20px;
-    font-family: Inconsolata;
-    font-weight: bold;
-    border-radius: 6px;
-  }
-
-  textarea.warning {
-    background-color: #ffcccc;
-  }
-
 /* CSS Styles adapted from http://www.nurik.net/exp/iohighlighter/ */
 body {
   background-color: #e8e8e8;
   -webkit-font-smoothing: antialiased;
 }
 
+body.theme-light {
+  background-color: #e8e8e8;
+  color: #000;
+}
+
 body.theme-dark {
   background-color: #222;
+  color: #fff;
 }
 
 paper-autogrow-textarea{
@@ -28,10 +21,22 @@ paper-autogrow-textarea{
   font-size: 20px;/*= 15pt, more info http://kyleschaeffer.com/development/css-font-size-em-vs-px-vs-pt-vs/*/
 }
 #taCode {
-  background-color: #ffcccc;
   font-family: Inconsolata;
   font-size: 20px;/*= 15pt, more info http://kyleschaeffer.com/development/css-font-size-em-vs-px-vs-pt-vs/*/
 }
+
+.theme-light #taCode {
+  background-color: #ffcccc;
+}
+
+#slidesWarnings {
+    background-color: #f00;
+    color: #fff;
+    padding: 20px;
+    font-family: Inconsolata;
+    font-weight: bold;
+    border-radius: 6px;
+  }
 
 /*Themes*/
 .theme-dark #taCode {

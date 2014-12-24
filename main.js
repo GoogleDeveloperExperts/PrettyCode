@@ -131,7 +131,6 @@ mainContent.validateForSlides = function(){
   for (var i = 0; i < lines.length; i++) {
     if (lines[i].length > MAX_LINE_LENGTH) {
       warn.push('Line ' + (i + 1) + ' has more than ' + MAX_LINE_LENGTH + ' characters!');
-      break;
     }
   }
   if (warn.length>0){

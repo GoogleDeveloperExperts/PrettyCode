@@ -1,12 +1,15 @@
 //Use Polymer Bindings
 var mainContent = document.querySelector('#mainContent');
 
-//Get data from the localStorage
-mainContent.lang = localStorage.lang || '--';
-mainContent.code = localStorage.theCode || '';
-mainContent.theme = localStorage.theme || 'light';
-mainContent.fontPt = localStorage.fontPt || 14;
+//Get data from the syncStorage
+chrome.storage.sync.get(["lang","theCode","theme","fontPt"],function(localStorage){
+  mainContent.lang = localStorage.lang || '--';
+  mainContent.code = localStorage.theCode || '';
+  mainContent.theme = localStorage.theme || 'light';
+  mainContent.fontPt = localStorage.fontPt || 14;
 
+
+});
 mainContent.addEventListener('template-bound', function(){
 
   //Set the font-size
@@ -18,7 +21,10 @@ mainContent.addEventListener('template-bound', function(){
 
   //Add a change listener to the textArea
   mainContent.$.taCode.addEventListener('input', function() {
-    localStorage.theCode = mainContent.code = mainContent.$.taCode.value;
+    mainContent.code = mainContent.$.taCode.value;
+    chrome.storage.sync.set({'theCode': mainContent.code}, function() {
+      //Nothing to do
+    });
     //Code Changed, run the validation for slides
     mainContent.validateForSlides();
   });
@@ -61,7 +67,10 @@ var setThemeAndLang = function(){
 mainContent.languageSelected = function(selMenu){
   //Changed selected language, update the value and store
   if(selMenu.detail.isSelected){
-    localStorage.lang = mainContent.lang=selMenu.detail.item.dataset.value;
+    mainContent.lang=selMenu.detail.item.dataset.value;
+    chrome.storage.sync.set({'lang': mainContent.lang}, function() {
+      //Nothing to do
+    });
 
     //Set the theme and lang
     setThemeAndLang();
@@ -72,10 +81,13 @@ mainContent.languageSelected = function(selMenu){
 mainContent.chTheme = function(){
   //if checked theme is dark, otherwise light
   if(mainContent.$.ptbTheme.checked){
-    localStorage.theme = mainContent.theme = 'dark';
+    mainContent.theme = 'dark';
   }else{
-    localStorage.theme = mainContent.theme = 'light';
+    mainContent.theme = 'light';
   }
+  chrome.storage.sync.set({'theme': mainContent.theme}, function() {
+    //Nothing to do
+  });
 
   //Set the theme and lang
   setThemeAndLang();
@@ -88,7 +100,10 @@ var ptToPx = function(valPt){
 
 mainContent.ptChange = function(){
   //TODO:Validate the value before saving it and using it to calculate the px value
-  localStorage.fontPt = mainContent.fontPt;
+
+  chrome.storage.sync.set({'fontPt': mainContent.fontPt}, function() {
+    //Nothing to do
+  });
 
   //Get the px approximate size
   var fontPx = ptToPx(mainContent.fontPt) + 'px';
@@ -131,7 +146,6 @@ mainContent.validateForSlides = function(){
   for (var i = 0; i < lines.length; i++) {
     if (lines[i].length > MAX_LINE_LENGTH) {
       warn.push('Line ' + (i + 1) + ' has more than ' + MAX_LINE_LENGTH + ' characters!');
-      break;
     }
   }
   if (warn.length>0){

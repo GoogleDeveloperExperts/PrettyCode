@@ -26,7 +26,7 @@
     </div>
     <div layout horizontal flex>
       <!--Language selection hidden as now the lang class id difficult to set on the prettify-element-->
-      <paper-dropdown-menu id="pdmLanguage" label="Select Language" style="display:none"
+      <paper-dropdown-menu id="pdmLanguage" label="Select Language"
           on-core-select="{{languageSelected}}">
         <paper-dropdown id="lang" class="dropdown">
             <core-menu class="menu" >
@@ -49,7 +49,7 @@
     </paper-autogrow-textarea>
     <div id="slidesWarnings">
     </div>
-    <prettify-element id="destination" text="{{code}}" on-tap="{{selPrettyCode}}"></prettify-element>
+    <prettify-element id="destination" text="{{code}}" language="{{language}}" on-tap="{{selPrettyCode}}"></prettify-element>
   </template>
 
   <script src="main.js"></script>

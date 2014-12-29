@@ -2,8 +2,8 @@
 var mainContent = document.querySelector('#mainContent');
 
 //Get data from the syncStorage
-chrome.storage.sync.get(["lang","theCode","theme","fontPt"],function(localStorage){
-  mainContent.lang = localStorage.lang || '--';
+chrome.storage.sync.get(["language","theCode","theme","fontPt"],function(localStorage){
+  mainContent.language = localStorage.language || '--';
   mainContent.code = localStorage.theCode || '';
   mainContent.theme = localStorage.theme || 'light';
   mainContent.fontPt = localStorage.fontPt || 14;
@@ -32,7 +32,7 @@ mainContent.addEventListener('template-bound', function(){
   //Find the label of the selected language to set it on the paper-dropdown-menu
   var mnItems =document.querySelectorAll('paper-item');
   [].some.call(mnItems, function(mnItem){
-    if (mnItem.dataset.value==mainContent.lang){
+    if (mnItem.dataset.value==mainContent.language){
       //Item found, update the selectedItem to change the label
       mainContent.$.pdmLanguage.selectedItemLabel=mnItem.innerText;
       return true;
@@ -67,8 +67,8 @@ var setThemeAndLang = function(){
 mainContent.languageSelected = function(selMenu){
   //Changed selected language, update the value and store
   if(selMenu.detail.isSelected){
-    mainContent.lang=selMenu.detail.item.dataset.value;
-    chrome.storage.sync.set({'lang': mainContent.lang}, function() {
+    mainContent.language=selMenu.detail.item.dataset.value;
+    chrome.storage.sync.set({'language': mainContent.language}, function() {
       //Nothing to do
     });
 

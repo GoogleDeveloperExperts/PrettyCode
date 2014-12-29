@@ -4,7 +4,7 @@
   "short_name": "PrettyCode",
   "description": "Code prettyfier following guidelines for GDE Videos",
 
-  "version": "0.0.1.0",
+  "version": "0.0.2.0",
 
   "icons": {
     "32": "assets/favicon_32.png",

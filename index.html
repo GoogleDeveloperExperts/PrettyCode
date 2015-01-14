@@ -17,39 +17,41 @@
   <link rel="import" href="bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
 </head>
 
-<body unresolved>
+<body unresolved fit>
   <template id='mainContent' is="auto-binding">
-    <div horizontal layout style="margin-top:5px">
-      <div style="margin:5px">Light</div>
-      <paper-toggle-button id="ptbTheme" style="margin:5px" on-change="{{chTheme}}"></paper-toggle-button>
-      <div style="margin:5px">Dark</div>
+    <div fit layout vertical>
+      <div horizontal layout style="margin-top:5px">
+        <div style="margin:5px">Light</div>
+        <paper-toggle-button id="ptbTheme" style="margin:5px" on-change="{{chTheme}}"></paper-toggle-button>
+        <div style="margin:5px">Dark</div>
+      </div>
+      <div layout horizontal>
+        <!--Language selection hidden as now the lang class id difficult to set on the prettify-element-->
+        <paper-dropdown-menu id="pdmLanguage" label="Select Language"
+            on-core-select="{{languageSelected}}">
+          <paper-dropdown id="lang" class="dropdown">
+              <core-menu class="menu" >
+                  <paper-item data-value="--">(auto detect language)</paper-item>
+                  <paper-item data-value="cpp">c++</paper-item>
+                  <paper-item data-value="java">java</paper-item>
+                  <paper-item data-value="js">javascript</paper-item>
+                  <paper-item data-value="xml">xml</paper-item>
+                  <paper-item data-value="html">html</paper-item>
+                  <paper-item data-value="css">css</paper-item>
+              </core-menu>
+          </paper-dropdown>
+        </paper-dropdown-menu>
+        <paper-input id="ptDimension" label="Font size (pt)" value="{{fontPt}}"
+            floatingLabel="true" on-change="{{ptChange}}"
+            style="margin-left:10px;" ></paper-input>
+      </div>
+      <paper-autogrow-textarea id="agTa" maxrows='20'>
+        <textarea id="taCode"></textarea>
+      </paper-autogrow-textarea>
+      <div id="slidesWarnings">
+      </div>
+      <prettify-element id="destination" text="{{code}}" language="{{language}}" on-tap="{{selPrettyCode}}" flex style='overflow:auto'></prettify-element>
     </div>
-    <div layout horizontal flex>
-      <!--Language selection hidden as now the lang class id difficult to set on the prettify-element-->
-      <paper-dropdown-menu id="pdmLanguage" label="Select Language"
-          on-core-select="{{languageSelected}}">
-        <paper-dropdown id="lang" class="dropdown">
-            <core-menu class="menu" >
-                <paper-item data-value="--">(auto detect language)</paper-item>
-                <paper-item data-value="cpp">c++</paper-item>
-                <paper-item data-value="java">java</paper-item>
-                <paper-item data-value="js">javascript</paper-item>
-                <paper-item data-value="xml">xml</paper-item>
-                <paper-item data-value="html">html</paper-item>
-                <paper-item data-value="css">css</paper-item>
-            </core-menu>
-        </paper-dropdown>
-      </paper-dropdown-menu>
-      <paper-input id="ptDimension" label="Font size (pt)" value="{{fontPt}}"
-          floatingLabel="true" on-change="{{ptChange}}"
-          style="margin-left:10px;" ></paper-input>
-    </div>
-    <paper-autogrow-textarea id="agTa">
-      <textarea id="taCode"></textarea>
-    </paper-autogrow-textarea>
-    <div id="slidesWarnings">
-    </div>
-    <prettify-element id="destination" text="{{code}}" language="{{language}}" on-tap="{{selPrettyCode}}"></prettify-element>
   </template>
 
   <script src="main.js"></script>

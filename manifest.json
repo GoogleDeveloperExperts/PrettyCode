@@ -2,15 +2,17 @@
   "manifest_version": 2,
   "name": "PrettyCode",
   "short_name": "PrettyCode",
-  "description": "Description for PrettyCode",
+  "description": "Code prettyfier following guidelines for GDE Videos",
 
-  "version": "0.0.1.0",
+  "version": "0.0.2.1",
 
   "icons": {
-    "16": "assets/icon_16.png",
-    "128": "assets/icon_128.png"
+    "32": "assets/favicon_32.png",
+    "128": "assets/favicon_128.png"
   },
-
+  "permissions": [
+    "storage"
+  ],
   "app": {
     "background": {
       "scripts": ["background.js"]

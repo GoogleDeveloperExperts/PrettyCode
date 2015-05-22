@@ -44,7 +44,12 @@ paper-autogrow-textarea{
   color: #fff;
 }
 
-.theme-dark prettify-element::shadow pre { font-family: Inconsolata; font-size: 20px; background-color:transparent;}
+.theme-dark prettify-element::shadow pre {
+  font-family: Inconsolata;
+  font-size: 20px;
+  background-color:transparent;
+  -webkit-user-select: text;/*User Text selectio for Chrome Apps*/
+}
 .theme-dark prettify-element::shadow .pln { color: #fff }  /* plain text */
 .theme-dark prettify-element::shadow .str,
 .theme-dark prettify-element::shadow .atv { color: #57bb8a }  /* string content and attribute value */
@@ -63,7 +68,12 @@ paper-autogrow-textarea{
 .theme-dark prettify-element::shadow .fun { color: #fff }  /* a function name */
 
 
-.theme-light prettify-element::shadow pre { font-family: Inconsolata; font-size: 20px; background-color:transparent;}
+.theme-light prettify-element::shadow pre {
+  font-family: Inconsolata;
+  font-size: 20px;
+  background-color:transparent;
+  -webkit-user-select: text;/*User Text selectio for Chrome Apps*/
+}
 .theme-light prettify-element::shadow .pln { color: #000 }  /* plain text */
 .theme-light prettify-element::shadow .str,
 .theme-light prettify-element::shadow .atv { color: #0f9d58 }  /* string content and attribute value */

@@ -2,31 +2,33 @@
 <html>
 <head>
   <title>PrettyCode</title>
-  <link rel="stylesheet" href="styles.css">
+  <!--<link rel="stylesheet" href="styles.css">-->
   <link rel="stylesheet" href="fonts.css">
   <link rel="import" href="bower_components/polymer/polymer.html">
+  <link rel="import" href="bower_components/iron-flex-layout/classes/iron-flex-layout.html">
   <link rel="import" href="bower_components/prettify-element/prettify-element.html">
-  <link rel="import" href="bower_components/core-icons/core-icons.html">
-  <link rel="import" href="bower_components/core-menu/core-menu.html">
-  <link rel="import" href="bower_components/paper-item/paper-item.html">
+  <link rel="import" href="bower_components/iron-icons/iron-icons.html">
   <link rel="import" href="bower_components/paper-input/paper-input.html">
-  <link rel="import" href="bower_components/paper-input/paper-autogrow-textarea.html">
+  <link rel="import" href="bower_components/paper-input/paper-textarea.html">
   <link rel="import" href="bower_components/paper-button/paper-button.html">
   <link rel="import" href="bower_components/paper-toggle-button/paper-toggle-button.html">
-  <link rel="import" href="bower_components/paper-dropdown/paper-dropdown.html">
-  <link rel="import" href="bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+  
+  <link rel="import" href="styles.html">
 </head>
 
-<body unresolved fit>
-  <template id='mainContent' is="auto-binding">
-    <div fit layout vertical>
-      <div horizontal layout style="margin-top:5px">
+<body class="fit">
+  <template id="mainContent" is="dom-bind">
+    <div class="fit layout vertical">
+      <div class="horizontal layout" style="margin-top:5px">
         <div style="margin:5px">Light</div>
-        <paper-toggle-button id="ptbTheme" style="margin:5px" on-change="{{chTheme}}"></paper-toggle-button>
+        <paper-toggle-button id="ptbTheme" 
+            style="margin:5px" 
+            on-change="chTheme"></paper-toggle-button>
         <div style="margin:5px">Dark</div>
       </div>
-      <div layout horizontal>
+      <div class="layout horizontal">
         <!--Language selection hidden as now the lang class id difficult to set on the prettify-element-->
+        <!--
         <paper-dropdown-menu id="pdmLanguage" label="Select Language"
             on-core-select="{{languageSelected}}">
           <paper-dropdown id="lang" class="dropdown">
@@ -41,16 +43,22 @@
               </core-menu>
           </paper-dropdown>
         </paper-dropdown-menu>
-        <paper-input id="ptDimension" label="Font size (pt)" value="{{fontPt}}"
-            floatingLabel="true" on-change="{{ptChange}}"
+        -->
+        <paper-input id="ptDimension" label="Font size (pt)" 
+            value="{{fontPt}}" on-change="ptChange"
+            always-float-label
             style="margin-left:10px;" ></paper-input>
       </div>
-      <paper-autogrow-textarea id="agTa" maxrows='20'>
-        <textarea id="taCode"></textarea>
-      </paper-autogrow-textarea>
+      <paper-textarea id="agTa" value="{{code}}">
+      </paper-textarea>
       <div id="slidesWarnings">
       </div>
-      <prettify-element id="destination" text="{{code}}" language="{{language}}" on-tap="{{selPrettyCode}}" flex style='overflow:auto'></prettify-element>
+      <prettify-element id="destination" 
+        text="{{code}}" 
+        language="{{language}}" 
+        on-tap="selPrettyCode" 
+        class="flex"
+        style="overflow:auto"></prettify-element>
     </div>
   </template>
 

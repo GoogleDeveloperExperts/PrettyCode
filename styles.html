@@ -5,31 +5,52 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  body.theme-light {
-    background-color: #e8e8e8;
-    color: #000;
-  }
-  
-  body.theme-dark {
+  #mainDiv.theme-dark {
     background-color: #222;
     color: #fff;
   }
   
-  paper-autogrow-textarea{
+  #mainDiv.theme-light {
+    background-color: #e8e8e8;
+    color: #000;
+  }
+  
+  paper-textarea {
     width: 100%;
     min-height: 90px;
+    max-height: 50%;
+    
     font-family: Inconsolata;
     font-size: 20px;/*= 15pt, more info http://kyleschaeffer.com/development/css-font-size-em-vs-px-vs-pt-vs/*/
   }
   
+  paper-input.theme-dark {
+    --paper-input-container-input-color: #fff;
+  }
+  
+  paper-input.theme-light {
+    --paper-input-container-input-color: #000;
+  }
+  
+  paper-textarea.theme-dark {
+    background-color: #300;
+    --paper-input-container-input-color: #fff;
+  }
+  
+  paper-textarea.theme-light {
+    background-color: #ffcccc;
+    --paper-input-container-input-color: #000;
+  }
+  
   #slidesWarnings {
-      background-color: #f00;
-      color: #fff;
-      padding: 20px;
-      font-family: Inconsolata;
-      font-weight: bold;
-      border-radius: 6px;
-    }
+    background-color: #f00;
+    color: #fff;
+    padding: 20px;
+    font-family: Inconsolata;
+    font-weight: bold;
+    border-radius: 6px;
+  }
+  
   prettify-element {
     --prettify-pre: {
       font-family: Inconsolata;

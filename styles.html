@@ -15,21 +15,22 @@
     color: #000;
   }
   
-  paper-textarea {
-    width: 100%;
-    min-height: 90px;
-    max-height: 50%;
-    
-    font-family: Inconsolata;
-    font-size: 20px;/*= 15pt, more info http://kyleschaeffer.com/development/css-font-size-em-vs-px-vs-pt-vs/*/
-  }
-  
   paper-input.theme-dark {
     --paper-input-container-input-color: #fff;
   }
   
   paper-input.theme-light {
     --paper-input-container-input-color: #000;
+  }
+  
+  paper-textarea {
+    width: auto;
+    min-height: 90px;
+    max-height: 50%;
+    --paper-input-container-input: {
+      font-family: Inconsolata;
+      font-size: 20px;/*= 15pt, more info http://kyleschaeffer.com/development/css-font-size-em-vs-px-vs-pt-vs/*/
+    };
   }
   
   paper-textarea.theme-dark {
@@ -52,7 +53,8 @@
   }
   
   prettify-element {
-    --prettify-pre: {
+    overflow: auto;
+    --prettify-code-pre: {
       font-family: Inconsolata;
       font-size: 20px;
       background-color:transparent;

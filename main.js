@@ -114,7 +114,9 @@ mainContent.ptChange = function(newVal) {
   mainContent.fontPx = ptToPx(newVal.detail.value) + 'px';
 
   //AutoGrow Text Area
-  mainContent.$.agTa.style.fontSize = mainContent.fontPx;
+  mainContent.$.agTa.style.fontSize = mainContent.fontPx;//Done to avoid errors in Polymer library... TODO:open Issue?
+  //--paper-input-container-input
+  mainContent.$.agTa.customStyle['--paper-input-container-input'] = {'font-size': mainContent.fontPx};
   
   //Pre Element
   if (mainContent.$.destination.shadowRoot) {

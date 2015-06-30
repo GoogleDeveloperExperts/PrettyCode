@@ -10,6 +10,7 @@ chrome.storage.sync.get(
     mainContent.theme = localStorage.theme || 'light';
     mainContent.fontPt = localStorage.fontPt || 14;
   });
+
 mainContent.addEventListener('dom-change', function() {
   //Set the font-size
   mainContent.ptChange({detail: mainContent.fontPt});
@@ -32,14 +33,27 @@ mainContent.addEventListener('dom-change', function() {
   //Select the theme on the slider
   //mainContent.$.ptbTheme.checked = (mainContent.theme == 'dark');
 
-  //Set the theme and lang on all the components
-  setThemeAndLang();
+  //Update Computed Styles
+  Polymer.updateStyles();
 
   //Run validation
   mainContent.validateForSlides();
 });
 
-mainContent._selTheme = function(theme){
+//Computed Styles
+mainContent._computedBodyClass = function(theme) {
+  return 'fit layout vertical theme-' + (theme || 'light');
+};
+
+mainContent._computedThemeClass = function(theme){
+  return 'theme-' + (theme || 'light');
+};
+
+mainContent._computedDestinationClass = function(theme) {
+  return 'flex theme-' + (theme || 'light');
+};
+
+mainContent._selTheme = function(theme) {
   var tmpTheme = theme || 'light';
   
   return (tmpTheme == 'dark');
@@ -56,23 +70,6 @@ mainContent.codeChanged = function(newVal) {
   
 };
 
-var setThemeAndLang = function() {
-  //Change the classes on the prettyprint element accordingly
-  var tmpTheme = mainContent.theme || 'light';
-  
-  document.body.className = 'theme-' + tmpTheme;
-
-  //mainContent.$.taCode.className = 'theme-' + mainContent.theme;
-
-  mainContent.$.destination.className = 'flex theme-' + tmpTheme;
-  Polymer.updateStyles();
-
-  //Change the language class if needed
-  /*if (mainContent.lang != '--') {
-    mainContent.$.destination.className += ' lang-' + mainContent.lang;
-  }*/
-};
-
 mainContent.languageSelected = function(selMenu) {
   //Changed selected language, update the value and store
   if (selMenu.detail.isSelected) {
@@ -82,7 +79,7 @@ mainContent.languageSelected = function(selMenu) {
     });
 
     //Set the theme and lang
-    setThemeAndLang();
+    Polymer.updateStyles();
   }
 
 };
@@ -98,8 +95,8 @@ mainContent.chTheme = function() {
     //Nothing to do
   });
 
-  //Set the theme and lang
-  setThemeAndLang();
+  //Update styles
+  Polymer.updateStyles();
 
 };
 
@@ -118,15 +115,13 @@ mainContent.ptChange = function(newVal) {
 
   //AutoGrow Text Area
   mainContent.$.agTa.style.fontSize = mainContent.fontPx;
-  //Text Area
-  //mainContent.$.taCode.style.fontSize = fontPx;
   
   //Pre Element
   if (mainContent.$.destination.shadowRoot) {
     var preElement = mainContent.$.destination.shadowRoot.querySelector('pre');
     preElement.style.fontSize = mainContent.fontPx;
-    Polymer.updateStyles();
   }
+  Polymer.updateStyles();
 
 };
 

@@ -21,7 +21,7 @@
 
 <body class="fit">
   <template id="mainContent" is="dom-bind">
-    <div class="fit layout vertical">
+    <div id="mainDiv" class$="[[_computedBodyClass(theme)]]">
       <div class="horizontal layout" style="margin-top:5px">
         <div style="margin:5px">Light</div>
         <paper-toggle-button id="ptbTheme" checked="{{_selTheme(theme)}}"
@@ -47,13 +47,15 @@
           </paper-dropdown>
         </paper-dropdown-menu>
         -->
-        <paper-input id="ptDimension" label="Font size (pt)" 
+        <paper-input id="ptDimension" label="Font size (pt)"
+            class$="[[_computedThemeClass(theme)]]"
             value="{{fontPt}}" on-value-changed="ptChange" 
             type="number" auto-validate
             always-float-label
             style="margin-left:10px;" ></paper-input>
       </div>
-      <paper-textarea id="agTa" value="{{code}}" on-value-changed="codeChanged">
+      <paper-textarea id="agTa" class$="[[_computedThemeClass(theme)]]"
+        value="{{code}}" on-value-changed="codeChanged">
       </paper-textarea>
       <div id="slidesWarnings">
       </div>
@@ -61,7 +63,7 @@
         text="{{code}}" 
         language="{{language}}" 
         on-tap="selPrettyCode" 
-        class="flex "
+        class$="[[_computedDestinationClass(theme)]]"
         style="overflow:auto"></prettify-element>
     </div>
   </template>

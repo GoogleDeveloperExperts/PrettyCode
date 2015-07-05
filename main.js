@@ -2,158 +2,170 @@
 var mainContent = document.querySelector('#mainContent');
 
 //Get data from the syncStorage
-chrome.storage.sync.get(["language","theCode","theme","fontPt"],function(localStorage){
-  mainContent.language = localStorage.language || '--';
-  mainContent.code = localStorage.theCode || '';
-  mainContent.theme = localStorage.theme || 'light';
-  mainContent.fontPt = localStorage.fontPt || 14;
-
-
-});
-mainContent.addEventListener('template-bound', function(){
-
-  //Set the font-size
-  mainContent.ptChange();
-
-  //Now that the template is bound update the code in the textArea
-  mainContent.$.taCode.value = mainContent.code;
-  mainContent.$.agTa.update(mainContent.$.taCode); //Update the autoGrowArea;
-
-  //Add a change listener to the textArea
-  mainContent.$.taCode.addEventListener('input', function() {
-    mainContent.code = mainContent.$.taCode.value;
-    chrome.storage.sync.set({'theCode': mainContent.code}, function() {
-      //Nothing to do
-    });
-    //Code Changed, run the validation for slides
-    mainContent.validateForSlides();
+chrome.storage.sync.get(
+  ['language', 'theCode', 'theme', 'fontPt'],
+  function(localStorage) {
+    mainContent.language = localStorage.language || '--';
+    mainContent.code = localStorage.theCode || '';
+    mainContent.theme = localStorage.theme || 'light';
+    mainContent.fontPt = localStorage.fontPt || 14;
   });
 
+mainContent.addEventListener('dom-change', function() {
+  //Set the font-size
+  mainContent.ptChange({detail: mainContent.fontPt});
+
+  //Now that the template is bound update the code in the textArea
+  //mainContent.$.codeValue = mainContent.code;
+  //mainContent.$.agTa.update(mainContent.$.taCode); //Update the autoGrowArea;
+
   //Find the label of the selected language to set it on the paper-dropdown-menu
-  var mnItems =document.querySelectorAll('paper-item');
-  [].some.call(mnItems, function(mnItem){
-    if (mnItem.dataset.value==mainContent.language){
+  /*var mnItems = document.querySelectorAll('paper-item');
+  [].some.call(mnItems, function(mnItem) {
+    if (mnItem.dataset.value == mainContent.language) {
       //Item found, update the selectedItem to change the label
-      mainContent.$.pdmLanguage.selectedItemLabel=mnItem.innerText;
+      mainContent.$.pdmLanguage.selectedItemLabel = mnItem.innerText;
       return true;
     }
     return false;
-  });
+  });*/
 
   //Select the theme on the slider
-  mainContent.$.ptbTheme.checked=(mainContent.theme=='dark');
+  //mainContent.$.ptbTheme.checked = (mainContent.theme == 'dark');
 
-  //Set the theme and lang on all the components
-  setThemeAndLang();
+  //Update Computed Styles
+  Polymer.updateStyles();
 
   //Run validation
   mainContent.validateForSlides();
 });
 
-var setThemeAndLang = function(){
-  //Change the classes on the prettyprint element accordingly
-  document.body.className = 'theme-' + mainContent.theme;
+//Computed Styles
+mainContent._computedBodyClass = function(theme) {
+  return 'fit layout vertical theme-' + (theme || 'light');
+};
 
-  mainContent.$.taCode.className = 'theme-' + mainContent.theme;
+mainContent._computedThemeClass = function(theme){
+  return 'theme-' + (theme || 'light');
+};
 
-  mainContent.$.destination.className = 'theme-' + mainContent.theme;
+mainContent._computedDestinationClass = function(theme) {
+  return 'flex theme-' + (theme || 'light');
+};
 
-  //Change the language class if needed
-  /*if (mainContent.lang != '--') {
-    mainContent.$.destination.className += ' lang-' + mainContent.lang;
-  }*/
-}
+mainContent._selTheme = function(theme) {
+  var tmpTheme = theme || 'light';
+  
+  return (tmpTheme == 'dark');
+  
+};
 
-mainContent.languageSelected = function(selMenu){
+mainContent.codeChanged = function(newVal) {
+  
+  chrome.storage.sync.set({'theCode': mainContent.code}, function() {
+    //Nothing to do
+  });
+  //Code Changed, run the validation for slides
+  mainContent.validateForSlides();
+  
+};
+
+mainContent.languageSelected = function(selMenu) {
   //Changed selected language, update the value and store
-  if(selMenu.detail.isSelected){
-    mainContent.language=selMenu.detail.item.dataset.value;
+  if (selMenu.detail.isSelected) {
+    mainContent.language = selMenu.detail.item.dataset.value;
     chrome.storage.sync.set({'language': mainContent.language}, function() {
       //Nothing to do
     });
 
     //Set the theme and lang
-    setThemeAndLang();
+    Polymer.updateStyles();
   }
 
-}
+};
 
-mainContent.chTheme = function(){
+mainContent.chTheme = function() {
   //if checked theme is dark, otherwise light
-  if(mainContent.$.ptbTheme.checked){
+  if (mainContent.$.ptbTheme.checked) {
     mainContent.theme = 'dark';
-  }else{
+  }else {
     mainContent.theme = 'light';
   }
   chrome.storage.sync.set({'theme': mainContent.theme}, function() {
     //Nothing to do
   });
 
-  //Set the theme and lang
-  setThemeAndLang();
+  //Update styles
+  Polymer.updateStyles();
 
-}
+};
 
-var ptToPx = function(valPt){
-  return (16/12)*valPt;//return the font-size in px from the ptValue
-}
+var ptToPx = function(valPt) {
+  return (16 / 12) * valPt;//return the font-size in px from the ptValue
+};
 
-mainContent.ptChange = function(){
-  //TODO:Validate the value before saving it and using it to calculate the px value
-
-  chrome.storage.sync.set({'fontPt': mainContent.fontPt}, function() {
+mainContent.ptChange = function(newVal) {
+  
+  chrome.storage.sync.set({'fontPt': newVal.detail.value}, function() {
     //Nothing to do
   });
 
   //Get the px approximate size
-  var fontPx = ptToPx(mainContent.fontPt) + 'px';
+  mainContent.fontPx = ptToPx(newVal.detail.value) + 'px';
 
   //AutoGrow Text Area
-  mainContent.$.agTa.style.fontSize = fontPx;
-  //Text Area
-  mainContent.$.taCode.style.fontSize = fontPx;
+  mainContent.$.agTa.style.fontSize = mainContent.fontPx;//Done to avoid errors in Polymer library... TODO:open Issue?
+  //--paper-input-container-input
+  mainContent.$.agTa.customStyle['--paper-input-container-input'] = {'font-size': mainContent.fontPx};
+  
   //Pre Element
-  var preElement = mainContent.$.destination.shadowRoot.querySelector('pre');
-  preElement.style.fontSize = fontPx;
-
-}
-
-mainContent.selPrettyCode = function(sender){
-  //Get the pre element inside the prettyfy-element
-  var preElement = sender.currentTarget.shadowRoot.querySelector('pre');
-
-  //Select the text range
-  var doc = document;
-  var selection = window.getSelection();
-  var range = doc.createRange();
-  range.selectNodeContents(preElement);
-  selection.removeAllRanges();
-  selection.addRange(range);
-
-}
-
-mainContent.validateForSlides = function(){
-  var divW = document.querySelector("#slidesWarnings");
-  var warn = [];
-
-  var MAX_LINES = 20;
-  if ((mainContent.code.match(/\n/g) || []).length >= MAX_LINES) {
-    warn.push('More than ' + MAX_LINES + ' lines of code will be hard to read on a slide.');
+  if (mainContent.$.destination.shadowRoot) {
+    var preElement = mainContent.$.destination.shadowRoot.querySelector('pre');
+    preElement.style.fontSize = mainContent.fontPx;
   }
+  Polymer.updateStyles();
 
-  var lines = mainContent.code.split('\n') || [];
-  var MAX_LINE_LENGTH = 80;
-  for (var i = 0; i < lines.length; i++) {
-    if (lines[i].length > MAX_LINE_LENGTH) {
-      warn.push('Line ' + (i + 1) + ' has more than ' + MAX_LINE_LENGTH + ' characters!');
+};
+
+mainContent.selPrettyCode = function(sender) {
+  //Get the pre element inside the prettify-element
+  if (mainContent.$.destination.shadowRoot) {
+    var preElement = mainContent.$.destination.shadowRoot.querySelector('pre');
+    //Select the text range
+    var doc = document;
+    var selection = window.getSelection();
+    var range = doc.createRange();
+    range.selectNodeContents(preElement);
+    selection.removeAllRanges();
+    selection.addRange(range);
+  }
+};
+
+mainContent.validateForSlides = function() {
+  var divW = document.querySelector('#slidesWarnings');
+  
+  if (divW){
+    var warn = [];
+    
+    var MAX_LINES = 20;
+    if ((mainContent.code.match(/\n/g) || []).length >= MAX_LINES) {
+      warn.push('More than ' + MAX_LINES +
+        ' lines of code will be hard to read on a slide.');
+    }
+  
+    var lines = mainContent.code.split('\n') || [];
+    var MAX_LINE_LENGTH = 80;
+    for (var i = 0; i < lines.length; i++) {
+      if (lines[i].length > MAX_LINE_LENGTH) {
+        warn.push('Line ' + (i + 1) + ' has more than ' +
+          MAX_LINE_LENGTH + ' characters!');
+      }
+    }
+    if (warn.length > 0) {
+      divW.innerHTML = warn.join('<br>');
+    }else {
+      divW.innerHTML = 'Perfect code for slides';
     }
   }
-  if (warn.length>0){
-    divW.innerHTML = warn.join('<br>');
-  }else{
-    divW.innerHTML='Perfect code for slides';
-  }
-}
-
-
+};
 

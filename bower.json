@@ -6,13 +6,13 @@
   "author": "",
   "private": true,
   "dependencies": {
-    "polymer": "Polymer/polymer#^0.5.2",
-    "core-elements": "Polymer/core-elements#^0.5.2",
-    "prettify-element": "SmokyBob/prettify-element#master",
-    "paper-button": "Polymer/paper-button#~0.5.2",
-    "paper-dropdown-menu": "Polymer/paper-dropdown-menu#~0.5.2",
-    "paper-dropdown": "Polymer/paper-dropdown#~0.5.2",
-    "paper-input": "Polymer/paper-input#~0.5.2",
-    "paper-toggle-button": "Polymer/paper-toggle-button#~0.5.2"
+    "polymer": "Polymer/polymer#^1.0.5",
+    "prettify-element": "smokybob/prettify-element#1.0",
+    "iron-flex-layout": "PolymerElements/iron-flex-layout#^1.0.1",
+    "iron-icons": "PolymerElements/iron-icons#^1.0.1",
+    "paper-input": "PolymerElements/paper-input#^1.0.0",
+    "paper-button": "PolymerElements/paper-button#^1.0.1",
+    "paper-toggle-button": "PolymerElements/paper-toggle-button#^1.0.1",
+    "iron-autogrow-textarea": "SmokyBob/iron-autogrow-textarea#inherit-color"
   }
 }

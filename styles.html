@@ -1,0 +1,151 @@
+<!--CSS Styles adapted from http://www.nurik.net/exp/iohighlighter/-->
+<style is="custom-style">
+  body {
+    background-color: #e8e8e8;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  #mainDiv.theme-dark {
+    background-color: #222;
+    color: #fff;
+  }
+  
+  #mainDiv.theme-light {
+    background-color: #e8e8e8;
+    color: #000;
+  }
+  
+  paper-input.theme-dark {
+    --paper-input-container-input-color: #fff;
+  }
+  
+  paper-input.theme-light {
+    --paper-input-container-input-color: #000;
+  }
+  
+  paper-textarea {
+    width: auto;
+    min-height: 90px;
+    max-height: 50%;
+    --paper-input-container-input: {
+      font-family: Inconsolata;
+      font-size: 20px;/*= 15pt, more info http://kyleschaeffer.com/development/css-font-size-em-vs-px-vs-pt-vs/*/
+    };
+  }
+  
+  paper-textarea.theme-dark {
+    background-color: #300;
+    --paper-input-container-input-color: #fff;
+  }
+  
+  paper-textarea.theme-light {
+    background-color: #ffcccc;
+    --paper-input-container-input-color: #000;
+  }
+  
+  #slidesWarnings {
+    background-color: #f00;
+    color: #fff;
+    padding: 20px;
+    font-family: Inconsolata;
+    font-weight: bold;
+    border-radius: 6px;
+  }
+  
+  prettify-element {
+    overflow: auto;
+    --prettify-pre: {
+      font-family: Inconsolata;
+      font-size: 20px;
+      background-color:transparent;
+      -webkit-user-select: text;/*User Text selection for Chrome Apps*/
+    };
+  }
+  
+  prettify-element.theme-dark {
+    --prettify-typ-inline: {
+      color: #ff8a65;
+    };
+    --prettify-pun: {
+      color: #a3a3a3;
+    };
+    --prettify-str-string: {
+      color: #57bb8a;
+    };
+    --prettify-pln: {
+      color: #fff;
+    };
+    --prettify-kwd: {
+      color: #7baaf7;
+    };
+    --prettify-atn-attribute-name: {
+      color: #f06292;
+    };
+    --prettify-atv-attribute-value: {
+      color: #57bb8a;
+    };
+    --prettify-com-comment: {
+      color: #aaa;
+    };
+    --prettify-tag: {
+      color: #7baaf7;
+    };
+    --prettify-lit: {
+      color: #f4b400;
+    };
+    --prettify-opn-clo: {
+      color: #a3a3a3;
+    };
+    --prettify-dec-var: {
+      color: #e67c73;
+    };
+    --prettify-fun: {
+      color: #fff;
+    };
+    
+  }
+  
+  prettify-element.theme-light {
+    --prettify-typ-inline: {
+      color: #673ab7;
+    };
+    --prettify-pun: {
+      color: #a3a3a3;
+    };
+    --prettify-str-string: {
+      color: #0f9d58;
+    };
+    --prettify-pln: {
+      color: #000;
+    };
+    --prettify-kwd: {
+      color: #4285f4;
+    };
+    --prettify-atn-attribute-name: {
+      color: #e91e63;
+    };
+    --prettify-atv-attribute-value: {
+      color: #0f9d58;
+    };
+    --prettify-com-comment: {
+      color: #999;
+    };
+    --prettify-tag: {
+      color: #4285f4;
+    };
+    --prettify-lit: {
+      color: #db4437;
+    };
+    --prettify-opn-clo: {
+      color: #a3a3a3;
+    };
+    --prettify-dec-var: {
+      color: #e67c73;
+    };
+    --prettify-fun: {
+      color: #fff;
+    };
+    
+  }
+  
+</style>
